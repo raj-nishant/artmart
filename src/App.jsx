@@ -1,27 +1,44 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import AboutPage from "./pages/AboutPage";
 import ContactUs from "./pages/ContactUs";
 import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 import AddProduct from "./pages/AddProduct";
+import RegistrationPage from "./pages/RegistrationPage";
 
 const App = () => {
   return (
     <Router>
-      <Header />
-      <div style={{ marginLeft: "364px" }}>
-        {/* Adjust the margin based on your sidebar width */}
-        <Sidebar />
+      <AppContent />
+    </Router>
+  );
+};
+
+const AppContent = () => {
+  const location = useLocation();
+  const isRegister = location.pathname !== "/register";
+
+  return (
+    <>
+      {isRegister && <Header />}
+      {isRegister && <Sidebar />}
+      <div style={{ marginLeft: isRegister ? "364px" : "0" }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegistrationPage />} />
           <Route path="/about-page" element={<AboutPage />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/add-product" element={<AddProduct />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 };
 
