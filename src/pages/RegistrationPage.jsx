@@ -1,6 +1,10 @@
 import Header from "../components/Header";
 
 const RegistrationPage = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <Header showExtraButtons />
@@ -22,7 +26,10 @@ const RegistrationPage = () => {
                 Art.Mart is focused on enabling artists to achieve their goals.
               </p>
             </div>
-            <form className="flex flex-col items-center space-y-4">
+            <form
+              onSubmit={handleFormSubmit}
+              className="flex flex-col items-center space-y-4"
+            >
               <input
                 type="email"
                 className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
