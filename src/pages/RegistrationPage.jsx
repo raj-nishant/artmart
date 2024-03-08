@@ -1,13 +1,74 @@
 import Header from "../components/Header";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const RegistrationPage = () => {
-  const handleFormSubmit = (e) => {
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [showBoxes, setShowBoxes] = useState(false); // Set initial value to false
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    let redirectTimer;
+    if (successMessage) {
+      redirectTimer = setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+    return () => clearTimeout(redirectTimer);
+  }, [successMessage, navigate]);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log(email);
+    try {
+      const response = await fetch(
+        "https://artist-shop-back-end.onrender.com/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          throw new Error("Email is already in use");
+        } else {
+          throw new Error("Failed to register");
+        }
+      }
+
+      setSuccessMessage("Registration successful, redirecting to login......");
+      setErrorMessage("");
+      return await response.json();
+    } catch (error) {
+      setErrorMessage(error.message);
+      setSuccessMessage("");
+    }
   };
+
+  // Define the extra button
+  const extraButton = (
+    <button className="bg-green-500 text-white font-bold py-2 px-4 rounded mr-4 transition duration-300 hover:bg-green-600">
+      Extra Button
+    </button>
+  );
 
   return (
     <>
-      <Header showExtraButtons />
+      <Header extraButton={extraButton} />
       <div className="relative h-screen">
         <div className="pt-16">
           <div className="absolute inset-0 w-full h-full">
@@ -26,18 +87,54 @@ const RegistrationPage = () => {
                 Art.Mart is focused on enabling artists to achieve their goals.
               </p>
             </div>
-            <form
-              onSubmit={handleFormSubmit}
-              className="flex flex-col items-center space-y-4"
-            >
+            <form className="flex flex-col items-center space-y-4">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
                 placeholder="Enter your email to get started"
               />
-              <button className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600">
-                Submit
-              </button>
+
+              {!showBoxes && (
+                <button
+                  className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
+                  onClick={() => setShowBoxes(true)}
+                >
+                  Join
+                </button>
+              )}
+
+              {showBoxes && ( // Render name and password inputs when showBoxes is true
+                <>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                    placeholder="Enter your Name"
+                  />
+
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full p-2 mb-2 border rounded"
+                  />
+                </>
+              )}
+
+              {showBoxes && (
+                <button
+                  onClick={handleFormSubmit}
+                  className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
+                >
+                  Submit
+                </button>
+              )}
             </form>
           </div>
         </div>
