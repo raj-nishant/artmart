@@ -27,9 +27,6 @@ function LoginPage() {
       if (!response.ok) {
         throw new Error("Failed to authenticate user");
       }
-
-      // Convert response to JSON format and return it
-      return await response.json();
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -55,7 +52,6 @@ function LoginPage() {
             },
           }
         );
-        return await response.json();
       }
     } catch (error) {
       console.error("Error handling login:", error.message);
