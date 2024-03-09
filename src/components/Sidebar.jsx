@@ -1,11 +1,9 @@
-// Sidebar.js
-
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="bg-gray-100 text-black h-screen w-64 fixed top-20 left-0 overflow-y-auto px-7">
+    <div className="bg-gray-100 text-black h-screen w-64 fixed left-0 overflow-y-auto px-7">
       <nav className="mt-6">
         <div className="mb-4">
           <h1 className="text-lg font-bold">Dashboard</h1>

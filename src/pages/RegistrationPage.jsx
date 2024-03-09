@@ -73,17 +73,17 @@ const RegistrationPage = () => {
   return (
     <>
       <Header extraButton={extraButton} />
-      <div className="relative h-screen">
-        <div className="pt-16">
-          <div className="absolute inset-0 w-full h-full">
+      <div className="relative h-screen flex">
+        <div className="pt-16 w-2/3 flex">
+          <div className="absolute inset-0 h-full w-2/3">
             <img
               className="w-full h-full object-cover blur-sm"
               src="./bg.jpg"
               alt="Background"
             />
           </div>
-          <div className="relative z-10 p-6 bg-opacity-70 flex justify-around text-center">
-            <div className="w-1/2">
+          <div className="relative z-10 p-6 bg-opacity-70 w-full">
+            <div className="">
               <h1 className="text-4xl font-bold text-gray-800 mb-6">
                 Welcome to Art.Mart!
               </h1>
@@ -96,85 +96,87 @@ const RegistrationPage = () => {
                 art deserves a trusted partner who cares.
               </p>
             </div>
-            <form className="flex flex-col items-center space-y-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
-                placeholder="Enter your email to get started"
-              />
-
-              {!showBoxes && (
-                <button
-                  className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
-                  onClick={() => setShowBoxes(true)}
-                >
-                  Join
-                </button>
-              )}
-
-              {showBoxes && (
-                <>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
-                    placeholder="Enter your Name"
-                  />
-
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full p-2 mb-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="enter your instagram url"
-                    value={insta}
-                    onChange={(e) => setInsta(e.target.value)}
-                    className="w-full p-2 mb-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="enter your linkTree Url"
-                    value={linkTree}
-                    onChange={(e) => setLinkTree(e.target.value)}
-                    className="w-full p-2 mb-2 border rounded"
-                  />
-
-                  <input
-                    type="file"
-                    placeholder="upload image"
-                    value={profilePicture}
-                    onChange={(e) => setProfilePicture(e.target.value)}
-                    className="w-full p-2 mb-2 border rounded"
-                  />
-                </>
-              )}
-
-              {showBoxes && (
-                <button
-                  onClick={handleFormSubmit}
-                  className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
-                >
-                  Submit
-                </button>
-              )}
-
-              <button
-                className="text-gray-700 "
-                onClick={() => navigate("/login")}
-              >
-                Already a member? <span className="underline">Login</span>
-              </button>
-            </form>
           </div>
+        </div>
+        <div className="flex items-center justify-center w-2/6">
+          <form className="flex flex-col items-center space-y-4 w-full p-6">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+              placeholder="Enter your email to get started"
+            />
+
+            {!showBoxes && (
+              <button
+                className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
+                onClick={() => setShowBoxes(true)}
+              >
+                Join
+              </button>
+            )}
+
+            {showBoxes && (
+              <>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  placeholder="Enter your Name"
+                />
+
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+                <input
+                  type="text"
+                  placeholder="enter your instagram url"
+                  value={insta}
+                  onChange={(e) => setInsta(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+                <input
+                  type="text"
+                  placeholder="enter your linkTree Url"
+                  value={linkTree}
+                  onChange={(e) => setLinkTree(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+
+                <input
+                  type="file"
+                  placeholder="upload image"
+                  value={profilePicture}
+                  onChange={(e) => setProfilePicture(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+              </>
+            )}
+
+            {showBoxes && (
+              <button
+                onClick={handleFormSubmit}
+                className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            )}
+
+            <button
+              className="text-gray-700 "
+              onClick={() => navigate("/login")}
+            >
+              Already a member? <span className="underline">Login</span>
+            </button>
+          </form>
         </div>
       </div>
     </>
