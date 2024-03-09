@@ -8,7 +8,7 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSubmit = async () => {
     try {
       const response = await fetch(
         "https://artist-shop-back-end.onrender.com/api/user/authenticate",
@@ -29,33 +29,6 @@ function LoginPage() {
       }
     } catch (error) {
       setErrorMessage(error.message);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const userData = await handleLogin();
-      if (userData) {
-        console.log(userData);
-        localStorage.setItem("userData", JSON.stringify(userData));
-        const data = JSON.parse(localStorage.getItem("userData"));
-        const decode = jwtDecode(data.jwt);
-        console.log(decode);
-        const response = await fetch(
-          "https://artist-shop-back-end.onrender.com/api/user/detail",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${data.jwt}`,
-            },
-          }
-        );
-      }
-    } catch (error) {
-      console.error("Error handling login:", error.message);
-      // Handle errors, show error messages to the user, etc.
     }
   };
 
