@@ -9,6 +9,9 @@ const RegistrationPage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [insta, setInsta] = useState("");
+  const [linkTree, setLinkTree] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [showBoxes, setShowBoxes] = useState(false); // Set initial value to false
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,20 +28,21 @@ const RegistrationPage = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("instagramUrl", insta);
+    formData.append("linkTreeUrl", linkTree);
+    formData.append("image", profilePicture);
+
     try {
       const response = await fetch(
         "https://artist-shop-back-end.onrender.com/api/user/register",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-          }),
+          body: formData,
         }
       );
 
@@ -79,12 +83,17 @@ const RegistrationPage = () => {
             />
           </div>
           <div className="relative z-10 p-6 bg-opacity-70 flex justify-around text-center">
-            <div>
+            <div className="w-1/2">
               <h1 className="text-4xl font-bold text-gray-800 mb-6">
                 Welcome to Art.Mart!
               </h1>
               <p className="text-gray-600 mb-8">
                 Art.Mart is focused on enabling artists to achieve their goals.
+              </p>
+              <p>
+                Artist Shops provides the best and easiest platform for you to
+                sell your art in your own customized online store for free. Your
+                art deserves a trusted partner who cares.
               </p>
             </div>
             <form className="flex flex-col items-center space-y-4">
@@ -107,7 +116,7 @@ const RegistrationPage = () => {
                 </button>
               )}
 
-              {showBoxes && ( // Render name and password inputs when showBoxes is true
+              {showBoxes && (
                 <>
                   <input
                     type="text"
@@ -124,6 +133,28 @@ const RegistrationPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full p-2 mb-2 border rounded"
                   />
+                  <input
+                    type="text"
+                    placeholder="enter your instagram url"
+                    value={insta}
+                    onChange={(e) => setInsta(e.target.value)}
+                    className="w-full p-2 mb-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="enter your linkTree Url"
+                    value={linkTree}
+                    onChange={(e) => setLinkTree(e.target.value)}
+                    className="w-full p-2 mb-2 border rounded"
+                  />
+
+                  <input
+                    type="file"
+                    placeholder="upload image"
+                    value={profilePicture}
+                    onChange={(e) => setProfilePicture(e.target.value)}
+                    className="w-full p-2 mb-2 border rounded"
+                  />
                 </>
               )}
 
@@ -135,6 +166,13 @@ const RegistrationPage = () => {
                   Submit
                 </button>
               )}
+
+              <button
+                className="text-gray-700 "
+                onClick={() => navigate("/login")}
+              >
+                Already a member? <span className="underline">Login</span>
+              </button>
             </form>
           </div>
         </div>

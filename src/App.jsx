@@ -13,12 +13,15 @@ import Header from "./components/Header";
 import AddProduct from "./pages/AddProduct";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
+import { AuthProvider } from "./services/AuthContext";
 
 const App = () => {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 };
 

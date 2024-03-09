@@ -56,7 +56,6 @@ function LoginPage() {
           }
         );
         return await response.json();
-        navigate(`/${userData.id}`);
       }
     } catch (error) {
       console.error("Error handling login:", error.message);
