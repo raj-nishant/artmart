@@ -52,7 +52,7 @@ const Header = ({ extraButton }) => {
             </button>
           </Link>
         ) : (
-          <Link to={"/register"}>
+          <Link to={"/login"}>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
               Shop
             </button>
@@ -72,12 +72,12 @@ const Header = ({ extraButton }) => {
               alt="User Profile"
             />
             {showUserDetails && userDetails && (
-              <div className="absolute bg-white shadow-md rounded-md p-2 top-full">
+              <div className="absolute bg-gray-300 shadow-md rounded-md p-5 mt-3 right-0 top-full">
                 <div>{userDetails.name}</div>
                 <div>{userDetails.email}</div>
                 <button
                   onClick={handleLogoutClick}
-                  className="text-red-500 hover:text-red-700"
+                  className="bg-red-500 p-2 rounded-md text-white hover:text-red-700"
                 >
                   Logout
                 </button>
