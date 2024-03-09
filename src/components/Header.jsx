@@ -42,9 +42,20 @@ const Header = ({ extraButton }) => {
       <img className="w-28" src="/logo.png" alt="Logo" />
       <div className="flex items-center">
         {extraButton && <div>{extraButton}</div>}
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
-          Shop
-        </button>
+
+        {isAuthenticated ? (
+          <Link to={"/products"}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+              Shop
+            </button>
+          </Link>
+        ) : (
+          <Link to={"/register"}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+              Shop
+            </button>
+          </Link>
+        )}
 
         {isAuthenticated ? (
           <div
@@ -72,11 +83,18 @@ const Header = ({ extraButton }) => {
             )}
           </div>
         ) : (
-          <Link to={"/login"}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
-              Login
-            </button>
-          </Link>
+          <>
+            <Link to={"/login"}>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+                Login
+              </button>
+            </Link>
+            <Link to={"/register"}>
+              <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-4">
+                Join Us
+              </button>
+            </Link>
+          </>
         )}
       </div>
     </header>
