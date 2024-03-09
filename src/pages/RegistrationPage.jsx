@@ -73,24 +73,24 @@ const RegistrationPage = () => {
   return (
     <>
       <Header extraButton={extraButton} />
-      <div className="relative h-screen flex">
+      <div className="relative flex" style={{ height: "calc(100vh - 78px)" }}>
         <div className="pt-16 w-2/3 flex">
           <div className="absolute inset-0 h-full w-2/3">
             <img
-              className="w-full h-full object-cover blur-sm"
+              className="w-full h-full object-cover blur-xl"
               src="./bg.jpg"
               alt="Background"
             />
           </div>
-          <div className="relative z-10 p-6 bg-opacity-70 w-full">
+          <div className="relative z-10 p-24 bg-opacity-70 w-full">
             <div className="">
-              <h1 className="text-4xl font-bold text-gray-800 mb-6">
+              <h1 className="text-4xl font-bold text-gray-700 mb-6">
                 Welcome to Art.Mart!
               </h1>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 font-medium mb-8">
                 Art.Mart is focused on enabling artists to achieve their goals.
               </p>
-              <p>
+              <p className="pr-36">
                 Artist Shops provides the best and easiest platform for you to
                 sell your art in your own customized online store for free. Your
                 art deserves a trusted partner who cares.
