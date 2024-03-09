@@ -1,26 +1,16 @@
 import { useAuth } from "../services/AuthContext";
 
 const HomePage = () => {
-  const { user, login, logout, isAuthenticated } = useAuth();
+  const { user, login, logout, userDetails, isAuthenticated } = useAuth();
 
-  // Example usage
-  const handleLogin = () => {
-    login("a@a", "a");
-  };
-
-  const handleLogout = () => {
-    logout();
-  };
   return (
     <>
-      {isAuthenticated ? (
-        <div>
-          {console.log(user)}
-          <p>Welcome, {user.jwt}</p>
-          <button onClick={handleLogout}>Logout</button>
+      {isAuthenticated && userDetails && (
+        <div className="m-auto">
+          <p className="text-5xl">
+            Welcome, <span className="text-yellow-500">{userDetails.name}</span>
+          </p>
         </div>
-      ) : (
-        <button onClick={handleLogin}>Login</button>
       )}
     </>
   );

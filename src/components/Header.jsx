@@ -39,7 +39,9 @@ const Header = ({ extraButton }) => {
 
   return (
     <header className="bg-gray-100 text-black w-full px-7 py-4 flex items-center justify-between">
-      <img className="w-28" src="/logo.png" alt="Logo" />
+      <Link to={"/"}>
+        <img className="w-28" src="/logo.png" alt="Logo" />
+      </Link>
       <div className="flex items-center">
         {extraButton && <div>{extraButton}</div>}
 
