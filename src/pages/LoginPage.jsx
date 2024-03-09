@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useAuth } from "../services/AuthContext";
 
 const RegistrationPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -9,6 +9,7 @@ const RegistrationPage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   useEffect(() => {
     let redirectTimer;
@@ -22,30 +23,8 @@ const RegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const userData = await handleLogin();
-      if (userData) {
-        console.log(userData);
-        localStorage.setItem("userData", JSON.stringify(userData));
-        const data = JSON.parse(localStorage.getItem("userData"));
-        const decode = jwtDecode(data.jwt);
-        console.log(decode);
-        const response = await fetch(
-          "https://artist-shop-back-end.onrender.com/api/user/detail",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${data.jwt}`,
-            },
-          }
-        );
-        return await response.json();
-      }
-    } catch (error) {
-      console.error("Error handling login:", error.message);
-      // Handle errors, show error messages to the user, etc.
-    }
+    login(email, password);
+    navigate("/");
   };
   // Define the extra button
   const extraButton = (
