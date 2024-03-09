@@ -72,7 +72,7 @@ const Header = ({ extraButton }) => {
               alt="User Profile"
             />
             {showUserDetails && userDetails && (
-              <div className="absolute bg-gray-300 shadow-md rounded-md p-5 mt-3 right-0 top-full">
+              <div className="absolute bg-gray-300 shadow-md rounded-md p-5  right-0 top-full">
                 <div>{userDetails.name}</div>
                 <div>{userDetails.email}</div>
                 <button
