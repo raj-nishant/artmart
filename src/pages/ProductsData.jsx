@@ -32,14 +32,25 @@ const Product = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       {productData && isAuthenticated && (
-        <div className="mt-10">
+        <div className="mt-10 w-full">
           {productData.map((product, index) => (
-            <div key={index}>
-              <h2>{product.name}</h2>
-              <p>Price: ${product.price}</p>
-              <img src={product.images[0].url} alt="" />
+            <div
+              key={index}
+              className="flex items-center bg-white rounded-lg shadow-md mb-4 w-full"
+            >
+              <img
+                src={product.images[0].url}
+                alt=""
+                className="w-1/3 h-44 object-cover rounded-l-lg"
+              />
+              <div className="flex flex-col p-4 w-full">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                  {product.name}
+                </h2>
+                <p className="text-gray-600">${product.price}</p>
+              </div>
             </div>
           ))}
         </div>
