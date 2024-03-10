@@ -35,7 +35,7 @@ const RegistrationPage = () => {
     formData.append("password", password);
     formData.append("instagramUrl", insta);
     formData.append("linkTreeUrl", linkTree);
-    formData.append("image", profilePicture);
+    formData.append("profilePhotoUrl", profilePicture);
 
     try {
       const response = await fetch(
@@ -153,9 +153,7 @@ const RegistrationPage = () => {
 
                 <input
                   type="file"
-                  placeholder="upload image"
-                  value={profilePicture}
-                  onChange={(e) => setProfilePicture(e.target.value)}
+                  onChange={(e) => setProfilePicture(e.target.files[0])}
                   className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
                 />
               </>

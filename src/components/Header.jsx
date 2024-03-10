@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
+import { Avatar } from "@mui/material";
 
 const Header = ({ extraButton }) => {
   const {
@@ -59,25 +60,30 @@ const Header = ({ extraButton }) => {
           </Link>
         )}
 
-        {isAuthenticated ? (
+        {isAuthenticated && userDetails ? (
           <div
             className="relative"
             onMouseEnter={handleTooltipMouseEnter}
             onMouseLeave={handleTooltipMouseLeave}
           >
-            {console.log("jhfgjhgjhg")}
-            <img
-              className="w-12 cursor-pointer"
-              src="/profile.svg"
-              alt="User Profile"
+            <Avatar
+              alt={userDetails.profilePhotoUrl}
+              src="/static/images/avatar/1.jpg"
             />
             {showUserDetails && userDetails && (
-              <div className="absolute bg-gray-300 shadow-md rounded-md p-5  right-0 top-full">
+              <div className="absolute flex flex-col items-center bg-gray-300 shadow-md rounded-md p-5 w-40 gap-2 right-0 top-full">
                 <div>{userDetails.name}</div>
                 <div>{userDetails.email}</div>
+
+                <Link to={"/profile"}>
+                  <button className="bg-gray-500 p-2 rounded-md text-white hover:bg-gray-700">
+                    My Account
+                  </button>
+                </Link>
+
                 <button
                   onClick={handleLogoutClick}
-                  className="bg-red-500 p-2 rounded-md text-white hover:text-red-700"
+                  className="bg-red-500 p-2 rounded-md text-white hover:bg-red-700"
                 >
                   Logout
                 </button>

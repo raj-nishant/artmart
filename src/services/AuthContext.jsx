@@ -39,33 +39,35 @@ export const AuthProvider = ({ children }) => {
   // Function to handle login
   const login = async (email, password) => {
     try {
-      // Call your authentication API endpoint
+      const formData = new FormData();
+      formData.append("username", email);
+      formData.append("password", password);
+
       const response = await fetch(
         "https://artist-shop-back-end.onrender.com/api/user/authenticate",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: email,
-            password: password,
-          }),
+          body: formData,
         }
       );
 
       if (!response.ok) {
-        throw new Error("Failed to authenticate user");
+        // Handle specific error cases
+        if (response.status === 401) {
+          throw new Error("Invalid email or password");
+        } else {
+          throw new Error("Failed to authenticate user");
+        }
       }
 
-      // If authentication is successful, set user data
       const jwt = await response.json();
       localStorage.setItem("jwt", JSON.stringify(jwt));
       setUser(jwt);
       fetchUserDetails();
     } catch (error) {
       console.error("Error logging in:", error.message);
-      // Handle login errors
+      // Handle login errors more gracefully
+      // For example, display an error message to the user
       throw error;
     }
   };

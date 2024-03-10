@@ -9,25 +9,76 @@ const AddProduct = () => {
     setImagePreviewUrls(urls);
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    console.log(formData);
+
+    try {
+      const jwtData = JSON.parse(localStorage.getItem("jwt"));
+      const response = await fetch(
+        "https://artist-shop-back-end.onrender.com/api/illustrations/new",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${jwtData.jwt}`,
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          throw new Error("Email is already in use");
+        } else {
+          throw new Error("Failed to register");
+        }
+      }
+
+      // setSuccessMessage("Registration successful, redirecting to login......");
+      // setErrorMessage("");
+      return await response.json();
+    } catch (error) {
+      // setErrorMessage(error.message);
+      // setSuccessMessage("");
+    }
+  };
+
   return (
     <>
       <div className="flex mt-14">
         <div className="w-1/3 border-2 border-dotted border-black p-5">
-          <form className="mt-4">
+          <form onSubmit={handleFormSubmit} className="mt-4">
             <div className="mb-4">
               <label
-                htmlFor="description"
+                htmlFor="title"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Description
+                title
               </label>
               <input
                 type="text"
-                id="description"
-                name="description"
+                id="title"
+                name="title"
                 className="border border-gray-400 rounded-md py-2 px-3 w-full"
               />
             </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="price"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                price
+              </label>
+              <input
+                type="text"
+                id="price"
+                name="price"
+                className="border border-gray-400 rounded-md py-2 px-3 w-full"
+              />
+            </div>
+
             <div className="mb-4">
               <label
                 htmlFor="images"
@@ -41,10 +92,11 @@ const AddProduct = () => {
                 name="images"
                 accept="image/*"
                 multiple
-                onChange={handleImageChange} // Call handleImageChange when files are selected
+                onChange={handleImageChange}
                 className="border border-gray-400 rounded-md py-2 px-3 w-full"
               />
             </div>
+
             <div className="flex flex-wrap">
               {imagePreviewUrls.map((url, index) => (
                 <div key={index} className="w-1/4 p-1">

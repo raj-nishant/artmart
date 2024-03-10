@@ -11,21 +11,17 @@ const RegistrationPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  useEffect(() => {
-    let redirectTimer;
-    if (successMessage) {
-      redirectTimer = setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    }
-    return () => clearTimeout(redirectTimer);
-  }, [successMessage, navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    login(email, password);
-    navigate("/");
+    try {
+      await login(email, password);
+      setSuccessMessage("Login successful!");
+      navigate("/");
+    } catch (error) {
+      setErrorMessage("Login failed. Please check your credentials.");
+    }
   };
+
   // Define the extra button
   const extraButton = (
     <button className="bg-green-500 text-white font-bold py-2 px-4 rounded mr-4 transition duration-300 hover:bg-green-600">
@@ -36,6 +32,7 @@ const RegistrationPage = () => {
   return (
     <>
       <Header extraButton={extraButton} />
+
       <div className="relative flex" style={{ height: "calc(100vh - 78px)" }}>
         <div className="pt-16 w-2/3 flex">
           <div className="absolute inset-0 h-full w-2/3">
@@ -61,7 +58,10 @@ const RegistrationPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center w-2/6">
+        <div className="flex flex-col items-center justify-center w-2/6">
+          {errorMessage && (
+            <h1 className="text-red-500 font-semibold">{errorMessage}</h1>
+          )}
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center space-y-4 w-full p-6"
@@ -86,7 +86,7 @@ const RegistrationPage = () => {
             </button>
 
             <button
-              className="text-gray-700 "
+              className="text-gray-700"
               onClick={() => navigate("/register")}
             >
               Register a new account <span className="underline">Register</span>
