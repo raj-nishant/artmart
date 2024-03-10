@@ -68,19 +68,22 @@ const Header = ({ extraButton }) => {
           >
             <Avatar name={userDetails.name} src={userDetails.profilePhotoUrl} />
             {showUserDetails && userDetails && (
-              <div className="absolute flex flex-col items-center bg-gray-300 shadow-md rounded-md p-5 w-40 gap-2 right-0 top-full">
-                <div>{userDetails.name}</div>
-                <div>{userDetails.email}</div>
+              <div className="absolute flex flex-col items-center bg-white shadow-md rounded-md p-5 w-40 gap-2 right-0 top-full">
+                <div>
+                  Hi,{" "}
+                  <span className="text-yellow-600">{userDetails.name}</span>
+                </div>
+                {/* <div>{userDetails.email}</div> */}
 
                 <Link to={"/profile"}>
-                  <button className="bg-gray-500 p-2 rounded-md text-white hover:bg-gray-700">
+                  <button className="text-gray-700 p-2  underline hover:text-gray-900">
                     My Account
                   </button>
                 </Link>
 
                 <button
                   onClick={handleLogoutClick}
-                  className="bg-red-500 p-2 rounded-md text-white hover:bg-red-700"
+                  className="text-red-500 p-2 underline hover:text-red-700"
                 >
                   Logout
                 </button>
