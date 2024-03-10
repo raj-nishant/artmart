@@ -36,20 +36,29 @@ const Product = () => {
       {productData && isAuthenticated && (
         <div className="mt-10 w-full">
           {productData.map((product, index) => (
-            <div
-              key={index}
-              className="flex items-center bg-white rounded-lg shadow-md mb-4 w-full"
-            >
-              <img
-                src={product.images[0].url}
-                alt=""
-                className="w-1/3 h-44 object-cover rounded-l-lg"
-              />
-              <div className="flex flex-col p-4 w-full">
+            <div className="p-7 border mb-5">
+              <div key={index} className=" items-center bg-white mb-4 w-full">
                 <h2 className="text-lg font-semibold text-gray-800 mb-2">
                   {product.name}
                 </h2>
-                <p className="text-gray-600">${product.price}</p>
+
+                <div className="flex justify-between">
+                  <img
+                    src={product.images[0].url}
+                    alt=""
+                    className="w-1/3 h-44 object-cover rounded-l-lg"
+                  />
+                  <div>
+                    <input
+                      className="h-full border"
+                      type="text"
+                      placeholder="Description"
+                    />
+                  </div>
+                  <div className=" ">
+                    <p className="text-gray-600">${product.price}</p>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

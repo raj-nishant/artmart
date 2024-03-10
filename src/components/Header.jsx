@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
-import { Avatar } from "@chakra-ui/react";
+import { Avatar } from "@mui/material";
 
 const Header = ({ extraButton }) => {
   const {
@@ -66,11 +66,11 @@ const Header = ({ extraButton }) => {
             onMouseEnter={handleTooltipMouseEnter}
             onMouseLeave={handleTooltipMouseLeave}
           >
-            <Avatar name={userDetails.name} src={userDetails.profilePhotoUrl} />
+            <Avatar alt={userDetails.name} src={userDetails.profilePhotoUrl} />
             {showUserDetails && userDetails && (
               <div className="absolute flex flex-col items-center bg-white shadow-md rounded-md p-5 w-40 gap-2 right-0 top-full">
                 <div>
-                  Hi,{" "}
+                  Hi,
                   <span className="text-yellow-600">{userDetails.name}</span>
                 </div>
                 {/* <div>{userDetails.email}</div> */}

@@ -46,8 +46,8 @@ const AddProduct = () => {
 
   return (
     <>
-      <div className="flex mt-14">
-        <div className="w-1/3 border-2 border-dotted border-black p-5">
+      <div className="flex h-auto mt-14">
+        <div className=" border-2 border-dotted border-black p-5">
           <form onSubmit={handleFormSubmit} className="mt-4">
             <div className="mb-4">
               <label

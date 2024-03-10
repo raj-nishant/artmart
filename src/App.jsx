@@ -37,18 +37,20 @@ const AppContent = () => {
   return (
     <>
       {noHeaderSidebar && <Header />}
-      {noHeaderSidebar && <Sidebar />}
-      <div style={{ marginLeft: noHeaderSidebar ? "364px" : "0" }}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ManageProfile />} />
-          <Route path="/about-page" element={<AboutPage />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/products" element={<ProductsData />} />
-        </Routes>
+      <div className="flex w-full h-auto">
+        {noHeaderSidebar && <Sidebar />}
+        <div className="w-5/6 px-7">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/profile" element={<ManageProfile />} />
+            <Route path="/about-page" element={<AboutPage />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/products" element={<ProductsData />} />
+          </Routes>
+        </div>
       </div>
     </>
   );
