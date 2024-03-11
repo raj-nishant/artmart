@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../services/AuthContext";
+import Switch from '@mui/material/Switch';
+
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
   const { isAuthenticated } = useAuth();
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,27 +39,30 @@ const Product = () => {
       {productData && isAuthenticated && (
         <div className="mt-10 w-full">
           {productData.map((product, index) => (
-            <div className="p-7 border mb-5">
-              <div key={index} className=" items-center bg-white mb-4 w-full">
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                  {product.name}
-                </h2>
-
-                <div className="flex justify-between">
-                  <img
-                    src={product.images[0].url}
-                    alt=""
-                    className="w-1/3 h-44 object-cover rounded-l-lg"
+            <div key={index} className="p-7 border rounded-lg mb-5 shadow-md">
+              <div className="flex items-center bg-white rounded-lg p-4">
+                <img
+                  src={product.images[0].url}
+                  alt=""
+                  className="w-1/3 h-44 object-cover rounded-l-lg"
+                />
+                <div className="flex flex-col flex-grow ml-4">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                    {product.name}
+                  </h2>
+                  <input
+                    className="h-20 border rounded-md px-4 mb-2"
+                    type="text"
+                    placeholder="Description"
                   />
-                  <div>
-                    <input
-                      className="h-full border"
-                      type="text"
-                      placeholder="Description"
-                    />
-                  </div>
-                  <div className=" ">
+                  <div className="flex justify-between items-center">
                     <p className="text-gray-600">${product.price}</p>
+                    <div className="flex items-center">
+                      <Switch {...label} />
+                      <button type="submit" className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                        Submit for Review
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -66,6 +72,7 @@ const Product = () => {
       )}
     </div>
   );
+  
 };
 
 export default Product;

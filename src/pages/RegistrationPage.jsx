@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -72,7 +71,6 @@ const RegistrationPage = () => {
 
   return (
     <>
-      <Header extraButton={extraButton} />
       <div className="relative flex" style={{ height: "calc(100vh - 78px)" }}>
         <div className="pt-16 w-2/3 flex">
           <div className="absolute inset-0 h-full w-2/3">

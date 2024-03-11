@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import { Avatar } from "@mui/material";
 
-const Header = ({ extraButton }) => {
+const Header = () => {
   const {
     user,
     login,
@@ -44,7 +44,6 @@ const Header = ({ extraButton }) => {
         <img className="w-28" src="/logo.png" alt="Logo" />
       </Link>
       <div className="flex items-center">
-        {extraButton && <div>{extraButton}</div>}
 
         {isAuthenticated ? (
           <Link to={"/products"}>
