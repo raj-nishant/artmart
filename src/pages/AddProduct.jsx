@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 const AddProduct = () => {
   const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -18,7 +19,6 @@ const AddProduct = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     setLoading(true);
-    console.log(formData);
 
     try {
       const jwtData = JSON.parse(localStorage.getItem("jwt"));
@@ -34,25 +34,25 @@ const AddProduct = () => {
       );
 
       if (!response.ok) {
-        if (response.status === 409) {
-          throw new Error("Email is already in use");
-        } else {
-          throw new Error("Failed to register");
-        }
+        throw new Error("Failed to add product");
       }
 
       setLoading(false);
       navigate("/products");
       return await response.json();
     } catch (error) {
-      // setErrorMessage(error.message);
-      // setSuccessMessage("");
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
   return (
     <>
-      {/* <div className="flex h-auto mt-14"> */}
+      {errorMessage && (
+        <div className="bg-red-200 text-red-700 p-2 mb-4">{errorMessage}</div>
+      )}
       <div className="flex h-auto mt-14">
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
@@ -68,7 +68,7 @@ const AddProduct = () => {
                 htmlFor="title"
                 className="block text-gray-700 font-bold mb-2"
               >
-                title
+                Title
               </label>
               <input
                 type="text"
@@ -83,7 +83,7 @@ const AddProduct = () => {
                 htmlFor="price"
                 className="block text-gray-700 font-bold mb-2"
               >
-                price
+                Price
               </label>
               <input
                 type="text"

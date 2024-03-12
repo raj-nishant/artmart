@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import { Avatar } from "@mui/material";
 
@@ -14,6 +14,7 @@ const Header = () => {
   } = useAuth();
 
   const [showUserDetails, setShowUserDetails] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated && !userDetails) {
@@ -28,6 +29,7 @@ const Header = () => {
   const handleLogoutClick = () => {
     handleLogout();
     setShowUserDetails(false); // Close the tooltip after logout
+    navigate("/login");
   };
 
   const handleTooltipMouseEnter = () => {
@@ -44,7 +46,6 @@ const Header = () => {
         <img className="w-28" src="/logo.png" alt="Logo" />
       </Link>
       <div className="flex items-center">
-
         {isAuthenticated ? (
           <Link to={"/products"}>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
