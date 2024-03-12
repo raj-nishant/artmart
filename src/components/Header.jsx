@@ -71,7 +71,7 @@ const Header = () => {
               <div className="absolute flex flex-col items-center bg-white shadow-md rounded-md p-5 w-40 gap-2 right-0 top-full">
                 <div>
                   Hi,
-                  <span className="text-yellow-600">{userDetails.name}</span>
+                  <span className="text-yellow-600"> {userDetails.name}</span>
                 </div>
                 {/* <div>{userDetails.email}</div> */}
 

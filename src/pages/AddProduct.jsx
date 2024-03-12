@@ -86,7 +86,7 @@ const AddProduct = () => {
                 Price
               </label>
               <input
-                type="text"
+                type="number"
                 id="price"
                 name="price"
                 className="border border-gray-400 rounded-md py-2 px-3 w-full"
