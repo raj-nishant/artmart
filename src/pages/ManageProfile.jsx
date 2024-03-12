@@ -26,7 +26,7 @@ const ManageProfile = () => {
 
   return (
     <div
-      className="bg-gray-100 flex justify-center items-center"
+      className="bg-gray-100 w-full flex justify-center items-center"
       style={{ height: "calc(100vh - 78px)" }}
     >
       <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full">

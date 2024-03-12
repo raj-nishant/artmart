@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../services/AuthContext";
-import Switch from '@mui/material/Switch';
-
+import Switch from "@mui/material/Switch";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
   const { isAuthenticated } = useAuth();
-  const label = { inputProps: { 'aria-label': 'Switch demo' } };
+  const [loading, setLoading] = useState(true);
+  const label = { inputProps: { "aria-label": "Switch demo" } };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +28,7 @@ const Product = () => {
         }
         const data = await response.json();
         setProductData(data);
-        console.log(productData);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -36,16 +38,24 @@ const Product = () => {
 
   return (
     <div className="flex flex-col items-center">
+      {loading && (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      )}
       {productData && isAuthenticated && (
         <div className="mt-10 w-full">
           {productData.map((product, index) => (
             <div key={index} className="p-7 border rounded-lg mb-5 shadow-md">
               <div className="flex items-center bg-white rounded-lg p-4">
-                <img
-                  src={product.images[0].url}
-                  alt=""
-                  className="w-1/3 h-44 object-cover rounded-l-lg"
-                />
+                {product.images && product.images[0] && (
+                  <img
+                    src={product.images[0].url}
+                    alt="no img found"
+                    className="w-1/3 h-44 object-cover rounded-l-lg"
+                  />
+                )}
+
                 <div className="flex flex-col flex-grow ml-4">
                   <h2 className="text-lg font-semibold text-gray-800 mb-2">
                     {product.name}
@@ -59,7 +69,10 @@ const Product = () => {
                     <p className="text-gray-600">${product.price}</p>
                     <div className="flex items-center">
                       <Switch {...label} />
-                      <button type="submit" className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                      <button
+                        type="submit"
+                        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                      >
                         Submit for Review
                       </button>
                     </div>
@@ -72,7 +85,6 @@ const Product = () => {
       )}
     </div>
   );
-  
 };
 
 export default Product;

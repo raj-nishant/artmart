@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const AddProduct = () => {
   const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     const files = [...e.target.files];
@@ -12,6 +17,7 @@ const AddProduct = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    setLoading(true);
     console.log(formData);
 
     try {
@@ -35,8 +41,8 @@ const AddProduct = () => {
         }
       }
 
-      // setSuccessMessage("Registration successful, redirecting to login......");
-      // setErrorMessage("");
+      setLoading(false);
+      navigate("/products");
       return await response.json();
     } catch (error) {
       // setErrorMessage(error.message);
@@ -46,8 +52,16 @@ const AddProduct = () => {
 
   return (
     <>
+      {/* <div className="flex h-auto mt-14"> */}
       <div className="flex h-auto mt-14">
-        <div className=" border-2 border-dotted border-black p-5">
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          </div>
+        )}
+        <div className=" border-2 border-dotted border-black w-1/2 p-5">
           <form onSubmit={handleFormSubmit} className="mt-4">
             <div className="mb-4">
               <label
