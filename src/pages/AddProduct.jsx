@@ -44,7 +44,7 @@ const AddProduct = () => {
       setErrorMessage(error.message);
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 1000);
     }
   };
 

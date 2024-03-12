@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../services/AuthContext";
+import { Link } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -12,6 +13,7 @@ const Product = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(isAuthenticated());
       try {
         const jwtData = JSON.parse(localStorage.getItem("jwt"));
         const response = await fetch(
@@ -28,7 +30,9 @@ const Product = () => {
         }
         const data = await response.json();
         setProductData(data);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 700);
       } catch (error) {
         console.error(error);
       }
@@ -36,14 +40,32 @@ const Product = () => {
     fetchData();
   }, []);
 
-  return (
-    <div className="flex flex-col items-center">
-      {loading && (
+  if (!isAuthenticated()) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-xl font-semibold text-center">
+          Please login first to view products.
+        </p>
+        <Link to="/login" className="ml-4 text-blue-600 hover:underline">
+          Go to Login
+        </Link>
+      </div>
+    );
+  }
+
+  if (isAuthenticated() && loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
         <Box sx={{ display: "flex" }}>
           <CircularProgress />
         </Box>
-      )}
-      {productData && isAuthenticated && (
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center">
+      {productData && isAuthenticated() && (
         <div className="mt-10 w-full">
           {productData.map((product, index) => (
             <div key={index} className="p-7 border rounded-lg mb-5 shadow-md">
