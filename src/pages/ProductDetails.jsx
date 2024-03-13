@@ -33,12 +33,12 @@ const ProductDetails = () => {
   }, [id]);
 
   return (
-    <div className="mt-3 flex w-full">
+    <div className="mt-3 flex w-full justify-between">
       <div className="p-5 bg-white w-2/5 border flex items-center">
         {data && (
           <div className="md:flex">
             <img
-              className="h-1/2 object-cover md:h-full w-[450px]"
+              className="h-1/2 object-cover md:h-full"
               src={data.images[0].url}
               alt={data.name}
             />
