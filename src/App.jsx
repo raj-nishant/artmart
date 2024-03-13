@@ -17,6 +17,7 @@ import { AuthProvider } from "./services/AuthContext";
 import ManageProfile from "./pages/ManageProfile";
 import ProductsData from "./pages/ProductsData";
 import { useAuth } from "./services/AuthContext";
+import ProductDetails from "./pages/ProductDetails";
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const AppContent = () => {
             <Route path="/about-page" element={<AboutPage />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/products" element={<ProductsData />} />
           </Routes>
         </div>

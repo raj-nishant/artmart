@@ -68,27 +68,35 @@ const Product = () => {
       {productData && isAuthenticated() && (
         <div className="mt-10 w-full">
           {productData.map((product, index) => (
-            <div key={index} className="p-7 border rounded-lg mb-5 shadow-md">
-              <div className="flex items-center bg-white rounded-lg p-4">
-                {product.images && product.images[0] && (
-                  <img
-                    src={product.images[0].url}
-                    alt="no img found"
-                    className="w-1/3 h-44 object-cover rounded-l-lg"
-                  />
-                )}
-
-                <div className="flex flex-col flex-grow ml-4">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                    {product.name}
-                  </h2>
-                  <input
-                    className="h-20 border rounded-md px-4 mb-2"
-                    type="text"
-                    placeholder="Description"
-                  />
+            <Link key={index} to={`/products/${product.id}`}>
+              <div className="px-7 py-4 border rounded-lg mb-5 shadow-md">
+                <div className="flex items-center bg-white border border-slate-200 rounded-lg p-4 justify-between">
+                  <div>
+                    {product.images && product.images[0] && (
+                      <img
+                        src={product.images[0].url}
+                        alt="no img found"
+                        className="w-60 h-44 object-cover border rounded-lg"
+                      />
+                    )}
+                    <div className="flex text-lg mt-2 justify-center">
+                      <h2 className=" font-semibold text-gray-800 ">
+                        {product.name} -
+                      </h2>
+                      <span>${product.price}</span>
+                    </div>
+                    {/* <p className="text-gray-600 text-center mt-3 font-bold">
+                    ${product.price}
+                  </p> */}
+                  </div>
+                  <div className="flex flex-col w-1/3">
+                    <input
+                      className="h-40 border rounded-md px-4 text-center"
+                      type="text"
+                      placeholder="Add Description of Product"
+                    />
+                  </div>
                   <div className="flex justify-between items-center">
-                    <p className="text-gray-600">${product.price}</p>
                     <div className="flex items-center">
                       <Switch {...label} />
                       <button
@@ -101,7 +109,7 @@ const Product = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
