@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,6 +19,7 @@ import ManageProfile from "./pages/ManageProfile";
 import ProductsData from "./pages/ProductsData";
 import { useAuth } from "./services/AuthContext";
 import ProductDetails from "./pages/ProductDetails";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   return (
@@ -37,13 +39,20 @@ const AppContent = () => {
   const noSidebar = location.pathname !== "/profile";
 
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate("/register");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <>
       <Header />
       <div className="flex w-full h-auto">
         {noHeaderSidebar && <Sidebar />}
-        <div className="w-5/6 px-7">
+        <div className=" px-7">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegistrationPage />} />

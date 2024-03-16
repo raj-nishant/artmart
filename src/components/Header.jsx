@@ -41,20 +41,20 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-100 text-black w-full px-7 py-4 flex items-center justify-between">
+    <header className=" text-black w-full px-7 py-4 mt-3 flex items-center justify-between">
       <Link to={"/"}>
-        <img className="w-28" src="/logo.png" alt="Logo" />
+        <img className="w-32" src="/logo.png" alt="Logo" />
       </Link>
       <div className="flex items-center">
         {isAuthenticated ? (
           <Link to={"/products"}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4">
               Shop
             </button>
           </Link>
         ) : (
           <Link to={"/login"}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4">
               Shop
             </button>
           </Link>
@@ -93,12 +93,12 @@ const Header = () => {
         ) : (
           <>
             <Link to={"/login"}>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+              <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4">
                 Login
               </button>
             </Link>
             <Link to={"/register"}>
-              <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-4">
+              <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4">
                 Join Us
               </button>
             </Link>
