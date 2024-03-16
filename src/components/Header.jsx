@@ -46,20 +46,6 @@ const Header = () => {
         <img className="w-32" src="/logo.png" alt="Logo" />
       </Link>
       <div className="flex items-center">
-        {isAuthenticated ? (
-          <Link to={"/products"}>
-            <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4">
-              Shop
-            </button>
-          </Link>
-        ) : (
-          <Link to={"/login"}>
-            <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4">
-              Shop
-            </button>
-          </Link>
-        )}
-
         {isAuthenticated && userDetails ? (
           <div
             className="relative"
