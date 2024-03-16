@@ -150,7 +150,7 @@ const RegistrationPage = () => {
 
       <section className="border-t border-gray-100 dark:border-gray-800 mt-12">
         <div className="max-w-7xl w-full grid items-center gap-4 px-4 py-12 mx-auto lg:grid-cols-2 lg:px-6 lg:py-16">
-          <div className="space-y-4 lg:order-1 lg:space-y-6 ml-2">
+          <div className="space-y-4 lg:order-1 lg:space-y-6 ml-7">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
               Curated Indie Art
             </h2>
