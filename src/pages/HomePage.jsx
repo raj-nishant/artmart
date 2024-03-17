@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <>
       {isAuthenticated && userDetails && (
-        <div className="m-auto w-5/6 ">
+        <div className="m-auto mt-12 w-5/6">
           <p className="text-5xl">
             Welcome, <span className="text-yellow-500">{userDetails.name}</span>
           </p>

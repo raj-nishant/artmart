@@ -53,9 +53,9 @@ const AppContent = () => {
   return (
     <>
       <Header />
-      <div className="flex w-full h-auto">
+      <div className="flex w-full h-auto p-2">
         {noHeaderSidebar && <Sidebar />}
-        <div className="px-7 w-full">
+        <div className="px-7 w-full p-3">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegistrationPage />} />

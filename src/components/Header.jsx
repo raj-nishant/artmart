@@ -17,10 +17,10 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated && !userDetails) {
+    if (isAuthenticated() && !userDetails) {
       fetchUserDetails(); // Fetch user details only if authenticated and userDetails is not already fetched
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated()]);
 
   const handleLogout = () => {
     logout();
@@ -46,7 +46,7 @@ const Header = () => {
         <img className="w-32" src="/logo.png" alt="Logo" />
       </Link>
       <div className="flex items-center">
-        {isAuthenticated && userDetails ? (
+        {isAuthenticated() && userDetails ? (
           <div
             className="relative"
             onMouseEnter={handleTooltipMouseEnter}
