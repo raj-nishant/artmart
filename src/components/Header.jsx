@@ -41,7 +41,7 @@ const Header = () => {
   };
 
   return (
-    <header className=" text-black w-full px-7 py-4 mt-3 flex items-center justify-between">
+    <header className=" text-black w-full px-7 py-7  flex items-center justify-between bg-gradient-to-b from-slate-200 to-white">
       <Link to={"/"}>
         <img className="w-32" src="/logo.png" alt="Logo" />
       </Link>

@@ -55,7 +55,7 @@ const AppContent = () => {
       <Header />
       <div className="flex w-full h-auto">
         {noHeaderSidebar && <Sidebar />}
-        <div className=" px-7">
+        <div className="px-7 w-full">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegistrationPage />} />
