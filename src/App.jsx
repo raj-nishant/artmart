@@ -40,12 +40,15 @@ const AppContent = () => {
 
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const auth = isAuthenticated();
 
   useEffect(() => {
-    if (!isAuthenticated()) {
+    if (auth) {
+      navigate("/");
+    } else {
       navigate("/register");
     }
-  }, [isAuthenticated, navigate]);
+  }, [auth]);
 
   return (
     <>
