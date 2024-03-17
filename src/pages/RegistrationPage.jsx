@@ -73,39 +73,105 @@ const RegistrationPage = () => {
     <div style={{ height: "calc(100vh - 80px)" }}>
       <div className="grid grid-cols-1 gap-y-20 lg:grid-cols-2 lg:gap-x-20 xl:gap-x-32 xl:grid-cols-2 p-3 h-3/4">
         <div className="flex flex-col justify-center space-y-6">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Empowering Indie Artists in the Digital World
-          </h1>
-          <p className="text-gray-500 dark:text-gray-400">
-            Connect with a community of indie artists. Showcase your work. Build
-            your brand.
-          </p>
-          <form className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          {!showBoxes && (
+            <>
+              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+                Empowering Indie Artists in the Digital World
+              </h1>
+              <p className="text-gray-500 dark:text-gray-400">
+                Connect with a community of indie artists. Showcase your work.
+                Build your brand.
+              </p>
+            </>
+          )}
+          <form className="gap-2 sm:flex-row sm:items-center">
             <input
-              className="max-w-[400px] w-full border p-3"
+              className="max-w-md w-full border p-3"
               placeholder="Enter your email"
               required
               type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
-            <button
-              className="w-full sm:w-auto p-3 rounded-lg bg-black text-white"
-              type="submit"
+
+            {!showBoxes && (
+              <button
+                className="w-full sm:w-auto p-3 rounded-lg bg-black text-white"
+                onClick={() => setShowBoxes(true)}
+              >
+                Join Us
+              </button>
+            )}
+
+            {showBoxes && (
+              <div className="flex flex-col">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  placeholder="Enter your Name"
+                />
+
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+                <input
+                  type="text"
+                  placeholder="enter your instagram url"
+                  value={insta}
+                  onChange={(e) => setInsta(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+                <input
+                  type="text"
+                  placeholder="enter your linkTree Url"
+                  value={linkTree}
+                  onChange={(e) => setLinkTree(e.target.value)}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+
+                <input
+                  type="file"
+                  onChange={(e) => setProfilePicture(e.target.files[0])}
+                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                />
+              </div>
+            )}
+
+            {showBoxes && (
+              <button
+                onClick={handleFormSubmit}
+                className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            )}
+
+            {/* <button
+              className="text-gray-700 "
+              onClick={() => navigate("/login")}
             >
-              Join the Community
-            </button>
+              Already a member? <span className="underline">Login</span>
+            </button> */}
           </form>
         </div>
-        <div className="flex items-center justify-center space-y-6 ">
+        <div className="flex items-center justify-center space-y-6">
           <img
             alt="Artwork"
             className="rounded-xl object-cover border-2 border-gray-100 border-dashed"
-            height="400"
             src="/art.jpeg"
             style={{
-              aspectRatio: "600/400",
-              objectFit: "cover",
+              maxWidth: "600px",
+              maxHeight: "400px",
+              width: "100%",
+              height: "auto",
             }}
-            width="600"
           />
         </div>
       </div>
@@ -122,7 +188,7 @@ const RegistrationPage = () => {
               digital art world.
             </p>
           </div>
-          <div className="grid max-w-sm gap-4 border rounded-xl border-gray-200 dark:border-gray-800">
+          <div className="grid grid-cols-1 sm:grid-cols-3 max-w-sm gap-4 border rounded-xl border-gray-200 dark:border-gray-800">
             <div className="p-4 rounded-tl-xl rounded-tr-xl bg-gray-50 dark:bg-gray-850">
               <h3 className="text-lg font-semibold">Early Access</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -142,13 +208,13 @@ const RegistrationPage = () => {
               </p>
             </div>
           </div>
-          <Link className="underline" href="#">
+          <a className="underline" href="#">
             Sign Up for an Account
-          </Link>
+          </a>
         </div>
       </section>
 
-      <section className="border-t border-gray-100 dark:border-gray-800 mt-12">
+      <section className="border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl w-full grid items-center gap-4 px-4 py-12 mx-auto lg:grid-cols-2 lg:px-6 lg:py-16">
           <div className="space-y-4 lg:order-1 lg:space-y-6 ml-7">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
