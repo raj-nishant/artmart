@@ -86,7 +86,7 @@ const RegistrationPage = () => {
           )}
           <form className="gap-2 sm:flex-row sm:items-center">
             <input
-              className="max-w-md w-full border p-3"
+              className="max-w-md w-full border p-3 text-center"
               placeholder="Enter your email"
               required
               type="email"
@@ -110,7 +110,7 @@ const RegistrationPage = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  className="max-w-md w-full border p-3 text-center"
                   placeholder="Enter your Name"
                 />
 
@@ -119,27 +119,27 @@ const RegistrationPage = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  className="max-w-md w-full border p-3 text-center"
                 />
                 <input
                   type="text"
                   placeholder="enter your instagram url"
                   value={insta}
                   onChange={(e) => setInsta(e.target.value)}
-                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  className="max-w-md w-full border p-3 text-center"
                 />
                 <input
                   type="text"
                   placeholder="enter your linkTree Url"
                   value={linkTree}
                   onChange={(e) => setLinkTree(e.target.value)}
-                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  className="max-w-md w-full border p-3 text-center"
                 />
 
                 <input
                   type="file"
                   onChange={(e) => setProfilePicture(e.target.files[0])}
-                  className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-xs"
+                  className="max-w-md w-full border p-3 text-center"
                 />
               </div>
             )}
@@ -147,7 +147,7 @@ const RegistrationPage = () => {
             {showBoxes && (
               <button
                 onClick={handleFormSubmit}
-                className="bg-blue-500 text-white rounded-lg py-2 px-6 transition duration-300 hover:bg-blue-600"
+                className="max-w-md w-full border p-3 mt-3 rounded-lg bg-black text-white hover:bg-gray-900"
               >
                 Submit
               </button>
