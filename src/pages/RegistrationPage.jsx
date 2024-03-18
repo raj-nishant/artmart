@@ -73,17 +73,14 @@ const RegistrationPage = () => {
     <div style={{ height: "calc(100vh - 80px)" }}>
       <div className="grid grid-cols-1 gap-y-20 lg:grid-cols-2 lg:gap-x-20 xl:gap-x-32 xl:grid-cols-2 p-3 h-3/4">
         <div className="flex flex-col justify-center space-y-6">
-          {!showBoxes && (
-            <>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Empowering Indie Artists in the Digital World
-              </h1>
-              <p className="text-gray-500 dark:text-gray-400">
-                Connect with a community of indie artists. Showcase your work.
-                Build your brand.
-              </p>
-            </>
-          )}
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            Empowering Indie Artists in the Digital World
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400">
+            Connect with a community of indie artists. Showcase your work. Build
+            your brand.
+          </p>
+
           <form className="gap-2 sm:flex-row sm:items-center">
             <input
               className="max-w-md w-full border p-3 text-center"
