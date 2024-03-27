@@ -61,7 +61,7 @@ const AddProduct = () => {
             </Box>
           </div>
         )}
-        <div className=" border-2 border-dotted border-black w-1/2 p-5">
+        <div className=" border-2 border-dotted border-black w-1/2 p-5 bg-gray-50">
           <form onSubmit={handleFormSubmit} className="mt-4">
             <div className="mb-4">
               <label
@@ -74,6 +74,7 @@ const AddProduct = () => {
                 type="text"
                 id="title"
                 name="title"
+                placeholder="Enter the title"
                 className="border border-gray-400 rounded-md py-2 px-3 w-full"
               />
             </div>
@@ -89,6 +90,7 @@ const AddProduct = () => {
                 type="number"
                 id="price"
                 name="price"
+                placeholder="Enter the price"
                 className="border border-gray-400 rounded-md py-2 px-3 w-full"
               />
             </div>

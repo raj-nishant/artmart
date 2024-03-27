@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useLocation,
 } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -14,12 +14,10 @@ import Header from "./components/Header";
 import AddProduct from "./pages/AddProduct";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
-import { AuthProvider } from "./services/AuthContext";
+import { AuthProvider, useAuth } from "./services/AuthContext";
 import ManageProfile from "./pages/ManageProfile";
 import ProductsData from "./pages/ProductsData";
-import { useAuth } from "./services/AuthContext";
 import ProductDetails from "./pages/ProductDetails";
-import { useNavigate } from "react-router-dom";
 
 const App = () => {
   return (
@@ -33,22 +31,16 @@ const App = () => {
 
 const AppContent = () => {
   const location = useLocation();
+  const { isAuthenticated, authChecked } = useAuth();
+
+  // Wait for the authentication check to complete before rendering the routes
+  if (!authChecked) {
+    return <div>Loading...</div>;
+  }
+
+  const auth = isAuthenticated();
   const noHeaderSidebar =
     location.pathname !== "/register" && location.pathname !== "/login";
-
-  const noSidebar = location.pathname !== "/profile";
-
-  const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
-  const auth = isAuthenticated();
-
-  useEffect(() => {
-    if (auth) {
-      navigate("/");
-    } else {
-      navigate("/register");
-    }
-  }, [auth]);
 
   return (
     <>
@@ -57,15 +49,42 @@ const AppContent = () => {
         {noHeaderSidebar && <Sidebar />}
         <div className="px-7 w-full p-3">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<ManageProfile />} />
-            <Route path="/about-page" element={<AboutPage />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/add-product" element={<AddProduct />} />
-            <Route path="/products/:id" element={<ProductDetails />} />
-            <Route path="/products" element={<ProductsData />} />
+            <Route
+              path="/"
+              element={auth ? <HomePage /> : <Navigate to="/register" />}
+            />
+            <Route
+              path="/register"
+              element={auth ? <Navigate to="/" /> : <RegistrationPage />}
+            />
+            <Route
+              path="/login"
+              element={auth ? <Navigate to="/" /> : <LoginPage />}
+            />
+            <Route
+              path="/profile"
+              element={auth ? <ManageProfile /> : <Navigate to="/register" />}
+            />
+            <Route
+              path="/about-page"
+              element={auth ? <AboutPage /> : <Navigate to="/register" />}
+            />
+            <Route
+              path="/contact-us"
+              element={auth ? <ContactUs /> : <Navigate to="/register" />}
+            />
+            <Route
+              path="/add-product"
+              element={auth ? <AddProduct /> : <Navigate to="/register" />}
+            />
+            <Route
+              path="/products/:id"
+              element={auth ? <ProductDetails /> : <Navigate to="/register" />}
+            />
+            <Route
+              path="/products"
+              element={auth ? <ProductsData /> : <Navigate to="/register" />}
+            />
           </Routes>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [data, setData] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,10 +33,46 @@ const ProductDetails = () => {
     fetchData();
   }, [id]);
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `https://artist-shop-back-end.onrender.com/api/illustrations/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        navigate("/products");
+      } else {
+        console.error("Failed to delete the item.");
+      }
+    } catch (error) {
+      console.error("error deleting item", error);
+    }
+  };
+
+  const handleEdit = async () => {
+    try {
+      const response = await fetch(
+        `https://artist-shop-back-end.onrender.com/api/illustrations/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        navigate("/products");
+      } else {
+        console.error("Failed to delete the item.");
+      }
+    } catch (error) {
+      console.error("error deleting item", error);
+    }
+  };
+
   return (
     <div className="mt-3 flex w-full justify-between">
       <div className="p-5 bg-white w-2/5 border flex items-center">
-        {data && (
+        {data && data.images[0]?.url && (
           <div className="md:flex">
             <img
               className="h-1/2 object-cover md:h-full"
@@ -110,12 +147,32 @@ const ProductDetails = () => {
             </label>
           </div>
 
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            type="submit"
-          >
-            Save
-          </button>
+          <div className="flex justify-between">
+            <button
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+              type="submit"
+            >
+              Save
+            </button>
+
+            <div>
+              <button
+                onClick={handleEdit}
+                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
+                type="submit"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={handleDelete}
+                className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                type="submit"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

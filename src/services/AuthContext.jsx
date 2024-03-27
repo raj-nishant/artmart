@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Create a new context
 const AuthContext = createContext();
@@ -9,6 +9,8 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
+  // Added state to track if the authentication status check has been completed
+  const [authChecked, setAuthChecked] = useState(false);
 
   // Function to fetch user details
   const fetchUserDetails = async () => {
@@ -33,9 +35,10 @@ export const AuthProvider = ({ children }) => {
       setUserDetails(userDetails);
     } catch (error) {
       console.error("Error fetching user details:", error.message);
-      // Handle errors
+      // Optionally, handle errors such as clearing auth state or notifying the user
     }
   };
+
   // Function to handle login
   const login = async (email, password) => {
     try {
@@ -66,9 +69,7 @@ export const AuthProvider = ({ children }) => {
       fetchUserDetails();
     } catch (error) {
       console.error("Error logging in:", error.message);
-      // Handle login errors more gracefully
-      // For example, display an error message to the user
-      throw error;
+      throw error; // Rethrowing the error for the calling component to handle
     }
   };
 
@@ -76,28 +77,29 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("jwt");
     setUser(null);
+    setUserDetails(null);
   };
 
   // Function to check if user is authenticated
-  const isAuthenticated = () => {
-    return !!user;
-  };
+  const isAuthenticated = () => !!user;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const storedUserData = localStorage.getItem("jwt");
     if (storedUserData) {
       setUser(JSON.parse(storedUserData));
     }
+    setAuthChecked(true); // Mark that the auth status check has been completed
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        userDetails,
+        authChecked, // Providing authChecked state to context consumers
         login,
         logout,
-        isAuthenticated: isAuthenticated,
-        userDetails,
+        isAuthenticated,
         fetchUserDetails,
       }}
     >
