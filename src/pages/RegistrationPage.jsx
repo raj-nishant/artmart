@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { Carousel } from "./Carousel";
+import { slides } from "../services/carouselData.json";
 
 const RegistrationPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -71,7 +73,8 @@ const RegistrationPage = () => {
 
   return (
     <div style={{ height: "calc(100vh - 80px)" }}>
-      <div className="grid grid-cols-1 gap-y-10 sm:gap-y-20 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-32 p-3 h-auto">
+      <Carousel data={slides} />
+      <div className="grid grid-cols-1 gap-y-10 sm:gap-y-20 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-32 p-3 h-auto mt-24">
         <div className="flex flex-col justify-center space-y-4 sm:space-y-6">
           <h1 className="text-4xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Empowering Indie Artists in the Digital World
