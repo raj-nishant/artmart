@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../services/AuthContext";
 import { Link } from "react-router-dom";
 import Switch from "@mui/material/Switch";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
@@ -53,14 +51,27 @@ const Product = () => {
     );
   }
 
+  // if (isAuthenticated() && loading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <Box sx={{ display: "flex" }}>
+  //         <CircularProgress />
+  //       </Box>
+  //     </div>
+  //   );
+  // }
+
   if (isAuthenticated() && loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
-      </div>
-    );
+    const divElements = [];
+    for (let i = 0; i < 5; i++) {
+      divElements.push(
+        <div
+          key={i}
+          className="w-full bg-gray-100 h-56 mt-7 border rounded-lg"
+        ></div>
+      );
+    }
+    return <>{divElements}</>;
   }
 
   return (
@@ -70,7 +81,7 @@ const Product = () => {
           {productData.map((product, index) => (
             <Link key={index} to={`/products/${product.id}`}>
               <div className="px-7 py-4 border rounded-lg mb-5 shadow-md">
-                <div className="flex items-center bg-white border border-slate-200 rounded-lg p-4 justify-between">
+                <div className="flex items-center bg-white p-4 justify-between">
                   <div>
                     {product.images && product.images[0] && (
                       <img
