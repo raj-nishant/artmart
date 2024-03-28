@@ -67,7 +67,7 @@ const Product = () => {
       divElements.push(
         <div
           key={i}
-          className="w-full bg-gray-100 h-56 mt-7 border rounded-lg"
+          className="w-full bg-gradient-to-r from-gray-200 to-gray-300 h-56 mt-7 border border-gray-300 rounded-lg animate-pulse"
         ></div>
       );
     }
