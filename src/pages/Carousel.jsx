@@ -13,7 +13,7 @@ export const Carousel = ({ data }) => {
   };
 
   useEffect(() => {
-    const slideInterval = setInterval(nextSlide, 2000);
+    const slideInterval = setInterval(nextSlide, 2500);
     return () => clearInterval(slideInterval);
   }, [slide, data.length]);
 
@@ -30,7 +30,7 @@ export const Carousel = ({ data }) => {
           key={idx}
           className={`${
             slide === idx ? "opacity-100" : "opacity-0"
-          } absolute inset-0 w-full h-full object-cover rounded-lg shadow-lg transition-opacity duration-700 ease-in-out`}
+          } absolute inset-0 w-full h-full object-cover rounded-lg shadow-lg transition-opacity duration-700 ease-linear`}
         />
       ))}
       <BsArrowRightCircleFill
