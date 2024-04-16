@@ -39,6 +39,7 @@ const AppContent = () => {
   }
 
   const auth = isAuthenticated();
+  console.log(auth);
   const noHeaderSidebar =
     location.pathname !== "/register" && location.pathname !== "/login";
 

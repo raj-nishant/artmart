@@ -42,20 +42,21 @@ export const AuthProvider = ({ children }) => {
   // Function to handle login
   const login = async (email, password) => {
     try {
-      const formData = new FormData();
-      formData.append("username", email);
-      formData.append("password", password);
-
       const response = await fetch(
         "https://artist-shop-back-end.onrender.com/api/user/authenticate",
         {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: email,
+            password: password,
+          }),
         }
       );
 
       if (!response.ok) {
-        // Handle specific error cases
         if (response.status === 401) {
           throw new Error("Invalid email or password");
         } else {
@@ -66,10 +67,10 @@ export const AuthProvider = ({ children }) => {
       const jwt = await response.json();
       localStorage.setItem("jwt", JSON.stringify(jwt));
       setUser(jwt);
-      fetchUserDetails();
+      await fetchUserDetails();
     } catch (error) {
       console.error("Error logging in:", error.message);
-      throw error; // Rethrowing the error for the calling component to handle
+      throw error; // Allows calling component to handle the error
     }
   };
 
@@ -88,7 +89,8 @@ export const AuthProvider = ({ children }) => {
     if (storedUserData) {
       setUser(JSON.parse(storedUserData));
     }
-    setAuthChecked(true); // Mark that the auth status check has been completed
+    if (!user) localStorage.removeItem("jwt");
+    setAuthChecked(true);
   }, []);
 
   return (
